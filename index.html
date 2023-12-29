@@ -13,7 +13,7 @@
     <!-- <form method="POST" action="http://localhost:8083/web/taichungFormPostRedirect"> -->
     <form method="POST" action="https://testpt.ctbcbank.com/sweb/taichungFormPostRedirect">
     <!-- <form method="POST" action="https://www.27608818.com/web/taichungFormPostRedirect"> -->
-    <!-- <form method="POST" action="http://10.242.136.181:8083/sweb/taichungFormPostRedirect"> -->
+	<!-- <form method="POST" action="http://10.242.136.181:8083/sweb/taichungFormPostRedirect"> -->
       <table width="50%">
         <div class="form-group">
           <div class="col-sm-10">
@@ -48,38 +48,38 @@
       </div>
     </form>
     <br><br><br>
-    <form method="POST" action="https://www.27608818.com/tuipaymt/taichungPark/webview/parkgFeeQueryBarCode.faces">
+    <form method="GET">
       <table width="50%">
         <div class="form-group">
           <div class="col-sm-10">
-            舊版模擬台中市民卡APP Form POST到<br>
-            https://www.27608818.com/tuipaymt/taichungPark/webview/parkgFeeQueryBarCode.faces<br>
+            舊版模擬台中停車費 Form POST到<br>
+            /sweb/origin/parkingbilllist?taichungData=..<br>
             模式一需帶車種車號<br>
             模式二需帶停車單號<br><br>
           </div>
           <label for="carType" class="col-sm-2 col-form-label">車種carType:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="carType" name="carType" value="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="carTypeOld" name="carType" value="" aria-describedby="emailHelp">
             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
           </div>
         </div>
         <div class="form-group">
           <label for="carType" class="col-sm-2 col-form-label">車號carNo:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="carNo" name="carNo" value="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="carNoOld" name="carNo" value="" aria-describedby="emailHelp">
             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
           </div>
         </div>
         <div class="form-group">
           <label for="carType" class="col-sm-2 col-form-label">Barcode codeNo:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="codeNo" name="codeNo" value="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="codeNoOld" name="codeNo" value="" aria-describedby="emailHelp">
             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
           </div>
         </div>
       </table>
       <div class="col-sm-10">
-        <button onclick="doSubmit();" class="btn btn-success">送出</button>
+        <input type="button" onclick="taichung();" value="送出"></button>
       </div>
     </form>
     <br><br><br>
@@ -142,4 +142,20 @@
     </div>
   </form>
 
+  <script>
+  	function taichung() {
+    var carType = document.getElementById("carTypeOld").value;
+    var carNo = document.getElementById("carNoOld").value;
+	var codeNo = document.getElementById("codeNoOld").value;
+	
+	var formData = carType + ";" + carNo + ";";
+    var base64Encoded = btoa(formData);
+	var base64Encoded2 = base64Encoded.replace("=","");
+
+    var targetUrl = "https://testpt.ctbcbank.com/sweb/origin/ParkingBill?taichungData=" + base64Encoded2 + "%3D";
+
+	console.log(targetUrl);
+}
+
+  </script>
 </html>
