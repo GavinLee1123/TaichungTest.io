@@ -152,7 +152,7 @@
     var base64Encoded = btoa(formData);
 	var base64Encoded2 = base64Encoded.replace("=","");
 
-    var targetUrl = "https://testpt.ctbcbank.com/sweb/origin/ParkingBill?taichungData=" + base64Encoded2 + "%3D";
+    var targetUrl = "https://testpt.ctbcbank.com/sweb/origin/ParkingBill?taichungData=" + base64Encoded2;
 
 	window.location.href = targetUrl;
 }
